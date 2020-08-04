@@ -3,7 +3,7 @@
 #include <WiFiUdp.h>
 
 #define ssid 	 "Nombre de tu red"
-#define password "Contraseña      "
+#define password "Contraseña"
 
 int Pines[] =               {12,13,15,3}; // GPIO 12, luz roja, 13 luz blanca, 15 luz de planta, 3 hidroponia.
 const char* nombrePines[] = {"Luz roja","Luz blanca","Luz de planta","Hidroponia"};
