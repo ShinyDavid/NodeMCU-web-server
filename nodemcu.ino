@@ -2,7 +2,7 @@
 #include <NTPClient.h>
 #include <WiFiUdp.h>
 
-#define ssid 	   "Nombre de tu red"
+#define ssid 	 "Nombre de tu red"
 #define password "Contraseña      "
 
 int Pines[] =               {12,13,15,3}; // GPIO 12, luz roja, 13 luz blanca, 15 luz de planta, 3 hidroponia.
@@ -23,9 +23,9 @@ void setup() {
   Serial.begin(115200);
   for(int i=0;i<NumPines;i++)
   {
-		pinMode(Pines[i], OUTPUT);
-		digitalWrite(Pines[i], LOW);
-	}
+	pinMode(Pines[i], OUTPUT);
+	digitalWrite(Pines[i], LOW);
+  }
 
   Serial.print("Connecting to ");
   Serial.println(ssid);
@@ -71,20 +71,20 @@ void loop(){
             client.println();
 
             for(int i=0;i<NumPines;i++)
-		    		{
-						String busqueda = "GET /" + (String)Pines[i] + "/on";
-						if (header.indexOf(busqueda) >= 0) 
-              {
-                EncenderPinRele(Pines[i]);
-                break;
-              }
-              busqueda = "GET /" + (String)Pines[i] + "/off";
-              if (header.indexOf(busqueda) >= 0) 
-              {
-                ApagarPinRele(Pines[i]);
-                break;
-              }
-    				}
+	    {
+		String busqueda = "GET /" + (String)Pines[i] + "/on";
+		if (header.indexOf(busqueda) >= 0) 
+       		{
+                	EncenderPinRele(Pines[i]);
+                	break;
+              	}
+      		busqueda = "GET /" + (String)Pines[i] + "/off";
+              	if (header.indexOf(busqueda) >= 0) 
+              	{
+                	ApagarPinRele(Pines[i]);
+                	break;
+      		}
+	    }
             
             client.println("<!DOCTYPE html><html>");
             client.println("<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">");
@@ -97,8 +97,8 @@ void loop(){
             client.println("<body style=\"background-color: #DCDCDC;\"><h1>NodeMCU Web Server</h1>");
             client.println("<p>Hora: " + timeClient.getFormattedTime() + "</p>");
             
-        		for(int i=0;i<NumPines;i++)
-		  			{
+        	for(int i=0;i<NumPines;i++)
+		{
 	            client.println("<p>"+(String)nombrePines[i]+" - estatus " + StatusPinReleColoured(StatusPinRele(Pines[i])) + "</p>");
                     
 	            if (StatusPinRele(Pines[i]) == "apagado")
